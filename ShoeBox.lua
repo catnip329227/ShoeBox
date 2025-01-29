@@ -14,12 +14,6 @@ ScreenGui.Parent = CoreGui
 ScreenGui.Name = "CCWIPT32"  -- Renamed the GUI
 print("ScreenGui created and parented")
 
--- Show notification when menu is created
-StarterGui:SetCore("SendNotification", {
-    Title = "ShoeBox Menu",
-    Text = "Menu Opened",
-    Duration = 5,
-})
 
 -- Function to add rounded corners
 local function addRoundedCorners(instance, radius)
