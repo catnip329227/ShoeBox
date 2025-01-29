@@ -1303,7 +1303,7 @@ local function onCharacterAdded(character)
 end
 
 LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
-if LocalPlayer.Character then
+if LocalPlayer.Character then)
     onCharacterAdded(LocalPlayer.Character)
 end
 
