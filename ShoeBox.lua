@@ -14,6 +14,13 @@ ScreenGui.Parent = CoreGui
 ScreenGui.Name = "CCWIPT32"  -- Renamed the GUI
 print("ScreenGui created and parented")
 
+-- Show notification when menu is created
+StarterGui:SetCore("SendNotification", {
+    Title = "ShoeBox Menu",
+    Text = "Menu Opened",
+    Duration = 5,
+})
+
 -- Function to add rounded corners
 local function addRoundedCorners(instance, radius)
     local UICorner = Instance.new("UICorner")
@@ -184,6 +191,13 @@ for i, text in ipairs(buttonTexts) do
     Button.Parent = ScrollingFrame
     addRoundedCorners(Button, 10)
     print("Button for", text, "created and parented")
+
+    -- Show notification
+StarterGui:SetCore("SendNotification", {
+    Title = "ShoeBox Injected",
+    Text = "ShoeBox Injected",
+    Duration = 5,
+})
 
     -- Hover effect for buttons
     Button.MouseEnter:Connect(function()
@@ -1205,13 +1219,6 @@ end
 
 -- Load the aimbot
 Load()
-
--- Show notification
-StarterGui:SetCore("SendNotification", {
-    Title = "ShoeBox Injected",
-    Text = "ShoeBox Injected",
-    Duration = 5,
-})
 
     --// Support Check
     if not Drawing or not getgenv then
