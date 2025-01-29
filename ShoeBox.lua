@@ -902,34 +902,35 @@ local aimbotEnabled = false
 
 local function startAimbot()
     -- Aimbot script here
---// Preventing Multiple Processes
+-- Preventing Multiple Processes
 pcall(function()
     getgenv().Aimbot.Functions:Exit()
 end)
 
---// Environment
+-- Environment
 getgenv().Aimbot = {}
 local Environment = getgenv().Aimbot
 
---// Services
+-- Services
 local RunService = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
 local HttpService = game:GetService("HttpService")
 local TweenService = game:GetService("TweenService")
 local Players = game:GetService("Players")
 local Camera = game:GetService("Workspace").CurrentCamera
+local StarterGui = game:GetService("StarterGui")
 
---// Variables
+-- Variables
 local LocalPlayer = Players.LocalPlayer
 local Title = "Exunys Developer"
 local FileNames = {"Aimbot", "Configuration.json", "Drawing.json"}
 local Typing, Running, Animation, RequiredDistance, ServiceConnections = false, false, nil, 2000, {}
 
---// Support Functions
+-- Support Functions
 local mousemoverel = getgenv().mousemoverel or (Input and Input.MouseMove)
 local queueonteleport = getgenv().queue_on_teleport or syn.queue_on_teleport
 
---// Script Settings
+-- Script Settings
 Environment.Settings = {
     SendNotifications = false, -- Disabled notifications
     SaveSettings = true,
@@ -961,7 +962,7 @@ Environment.FOVSettings = {
 Environment.FOVCircle = Drawing.new("Circle")
 Environment.Locked = nil
 
---// Core Functions
+-- Core Functions
 local function Encode(Table)
     if Table and type(Table) == "table" then
         local EncodedTable = HttpService:JSONEncode(Table)
@@ -983,7 +984,7 @@ local function GetColor(Color)
     return Color3.fromRGB(R, G, B)
 end
 
---// Functions
+-- Functions
 local function SaveSettings()
     if Environment.Settings.SaveSettings then
         if isfile(Title.."/"..FileNames[1].."/"..FileNames[2]) then
@@ -1028,7 +1029,7 @@ local function GetClosestPlayer()
     end
 end
 
---// Typing Check
+-- Typing Check
 ServiceConnections.TypingStartedConnection = UserInputService.TextBoxFocused:Connect(function()
     Typing = true
 end)
@@ -1037,7 +1038,7 @@ ServiceConnections.TypingEndedConnection = UserInputService.TextBoxFocusReleased
     Typing = false
 end)
 
---// Create, Save & Load Settings
+-- Create, Save & Load Settings
 if Environment.Settings.SaveSettings then
     if not isfolder(Title) then
         makefolder(Title)
@@ -1146,7 +1147,7 @@ local function Load()
     end)
 end
 
---// Functions
+-- Functions
 Environment.Functions = {}
 
 function Environment.Functions:Exit()
