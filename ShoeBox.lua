@@ -79,7 +79,6 @@ TitleBar.Parent = MainFrame
 addRoundedCorners(TitleBar, 10)
 print("TitleBar created and parented")
 
-
 local TitleText = Instance.new("TextLabel")
 TitleText.Size = UDim2.new(1, -140, 1, 0)
 TitleText.Position = UDim2.new(0, 10, 0, 0)
@@ -146,6 +145,7 @@ MainContentFrame.BorderColor3 = Color3.fromRGB(10, 10, 10)
 MainContentFrame.Parent = MainFrame
 addRoundedCorners(MainContentFrame, 10)
 print("MainContentFrame created and parented")
+
 -- Visuals content frame
 local VisualsContentFrame = Instance.new("Frame")
 VisualsContentFrame.Size = UDim2.new(1, -150, 1, -40)
@@ -234,6 +234,114 @@ for i, text in ipairs(buttonTexts) do
         end
     end)
 end
+
+-- Add AimBot switch to AimStuffContentFrame
+local aimBotSwitchFrame = Instance.new("Frame")
+aimBotSwitchFrame.Size = UDim2.new(0.9, 0, 0, 40)
+aimBotSwitchFrame.Position = UDim2.new(0.05, 0, 0, 10)  -- Position moved to the top
+aimBotSwitchFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+aimBotSwitchFrame.BorderSizePixel = 2
+aimBotSwitchFrame.BorderColor3 = Color3.fromRGB(10, 10, 10)
+aimBotSwitchFrame.Parent = AimStuffContentFrame
+addRoundedCorners(aimBotSwitchFrame, 10)
+
+local aimBotLabel = Instance.new("TextLabel")
+aimBotLabel.Size = UDim2.new(0.7, 0, 1, 0)
+aimBotLabel.Position = UDim2.new(0, 10, 0, 0)
+aimBotLabel.BackgroundTransparency = 1
+aimBotLabel.Text = "AimBot"
+aimBotLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+aimBotLabel.Font = Enum.Font.SourceSans
+aimBotLabel.TextSize = 16
+aimBotLabel.TextXAlignment = Enum.TextXAlignment.Left
+aimBotLabel.Parent = aimBotSwitchFrame
+
+local aimBotCylinderSwitch = Instance.new("Frame")
+aimBotCylinderSwitch.Size = UDim2.new(0, 60, 0, 20)
+aimBotCylinderSwitch.Position = UDim2.new(0.8, 0, 0.5, -10)
+aimBotCylinderSwitch.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+aimBotCylinderSwitch.BorderSizePixel = 2
+aimBotCylinderSwitch.BorderColor3 = Color3.fromRGB(10, 10, 10)
+aimBotCylinderSwitch.Parent = aimBotSwitchFrame
+addRoundedCorners(aimBotCylinderSwitch, 10)
+
+local aimBotBall = Instance.new("Frame")
+aimBotBall.Size = UDim2.new(0, 20, 0, 20)
+aimBotBall.Position = UDim2.new(0, 0, 0, 0)
+aimBotBall.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+aimBotBall.Parent = aimBotCylinderSwitch
+addRoundedCorners(aimBotBall, 10)
+
+local aimBotToggled = false
+
+aimBotSwitchFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        aimBotToggled = not aimBotToggled
+        if aimBotToggled then
+            aimBotBall:TweenPosition(UDim2.new(1, -20, 0, 0), "Out", "Sine", 0.2)
+            aimBotCylinderSwitch.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+            startAimbot()
+        else
+            aimBotBall:TweenPosition(UDim2.new(0, 0, 0, 0), "Out", "Sine", 0.2)
+            aimBotCylinderSwitch.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+            stopAimbot()
+        end
+    end
+end)
+
+-- Add "Change Circle Color" button below the "AimBot" button
+local changeColorButtonFrame = Instance.new("Frame")
+changeColorButtonFrame.Size = UDim2.new(0.9, 0, 0, 40)
+changeColorButtonFrame.Position = UDim2.new(0.05, 0, 0, 60)  -- Positioned below the "AimBot" button
+changeColorButtonFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+changeColorButtonFrame.BorderSizePixel = 2
+changeColorButtonFrame.BorderColor3 = Color3.fromRGB(10, 10, 10)
+changeColorButtonFrame.Parent = AimStuffContentFrame
+addRoundedCorners(changeColorButtonFrame, 10)
+
+local changeColorLabel = Instance.new("TextLabel")
+changeColorLabel.Size = UDim2.new(0.7, 0, 1, 0)
+changeColorLabel.Position = UDim2.new(0, 10, 0, 0)
+changeColorLabel.BackgroundTransparency = 1
+changeColorLabel.Text = "Change Circle Color"
+changeColorLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+changeColorLabel.Font = Enum.Font.SourceSans
+changeColorLabel.TextSize = 16
+changeColorLabel.TextXAlignment = Enum.TextXAlignment.Left
+changeColorLabel.Parent = changeColorButtonFrame
+
+local changeColorCylinderSwitch = Instance.new("Frame")
+changeColorCylinderSwitch.Size = UDim2.new(0, 60, 0, 20)
+changeColorCylinderSwitch.Position = UDim2.new(0.8, 0, 0.5, -10)
+changeColorCylinderSwitch.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+changeColorCylinderSwitch.BorderSizePixel = 2
+changeColorCylinderSwitch.BorderColor3 = Color3.fromRGB(10, 10, 10)
+changeColorCylinderSwitch.Parent = changeColorButtonFrame
+addRoundedCorners(changeColorCylinderSwitch, 10)
+
+local changeColorBall = Instance.new("Frame")
+changeColorBall.Size = UDim2.new(0, 20, 0, 20)
+changeColorBall.Position = UDim2.new(0, 0, 0, 0)
+changeColorBall.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+changeColorBall.Parent = changeColorCylinderSwitch
+addRoundedCorners(changeColorBall, 10)
+
+local changeColorToggled = false
+
+changeColorButtonFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        changeColorToggled = not changeColorToggled
+        if changeColorToggled then
+            changeColorBall:TweenPosition(UDim2.new(1, -20, 0, 0), "Out", "Sine", 0.2)
+            changeColorCylinderSwitch.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+            -- Change the circle color to a random color
+            Environment.FOVCircle.Color = Color3.fromRGB(math.random(0, 255), math.random(0, 255), math.random(0, 255))
+        else
+            changeColorBall:TweenPosition(UDim2.new(0, 0, 0, 0), "Out", "Sine", 0.2)
+            changeColorCylinderSwitch.BackgroundColor3 = Color3.fromRGB(70, 70, 70)
+        end
+    end
+end)
 
 -- Fly script
 local flying = false
@@ -765,7 +873,7 @@ local function startESP()
 end
 
 local function stopESP()
-    espEnabled = false
+espEnabled = false
     for _, connection in ipairs(espConnections) do
         connection:Disconnect()
     end
@@ -792,6 +900,7 @@ ESPFrame.InputBegan:Connect(function(input)
         end
     end
 end)
+
 -- FOV Slider
 local FOVFrame = Instance.new("Frame")
 FOVFrame.Size = UDim2.new(0.9, 0, 0, 40)
@@ -890,6 +999,13 @@ local function onCharacterAdded(character)
     if switchStates["Infinite Jump"] then
         toggleInfiniteJump(true)
     end
+    if aimBotToggled then
+        startAimbot()
+    end
+    if changeColorToggled then
+        -- Ensure the circle color is reapplied after respawn
+        Environment.FOVCircle.Color = Color3.fromRGB(math.random(0, 255), math.random(0, 255), math.random(0, 255))
+    end
 end
 
 LocalPlayer.CharacterAdded:Connect(onCharacterAdded)
@@ -980,7 +1096,7 @@ end
 local function GetColor(Color)
     local R = tonumber(string.match(Color, "([%d]+)[%s]*,[%s]*[%d]+[%s]*,[%s]*[%d]+"))
     local G = tonumber(string.match(Color, "[%d]+[%s]*,[%s]*[%d]+[%s]*,[%s]*[%d]+"))
-    local B = tonumber(string.match(Color, "[%d]+[%s]*,[%s]*[%d]+[%s]*,[%s]*[%d]+"))
+    local B = tonumber(string.match(Color, "[%d]+[%s]*,[%s]*[%d]+[%s]*[%d]+"))
     return Color3.fromRGB(R, G, B)
 end
 
@@ -1310,6 +1426,10 @@ local function onCharacterAdded(character)
     end
     if aimBotToggled then
         startAimbot()
+    end
+    if changeColorToggled then
+        -- Ensure the circle color is reapplied after respawn
+        Environment.FOVCircle.Color = Color3.fromRGB(math.random(0, 255), math.random(0, 255), math.random(0, 255))
     end
 end
 
